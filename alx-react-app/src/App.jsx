@@ -1,6 +1,9 @@
+import WelcomeMessage from './component/WelcomeMessage';
 function App() {
   return (
-    <h1>Hello, React! 🚀</h1>
+    <div>
+      <WelcomeMessage />
+    </div>
   )
 }
 
