@@ -1,12 +1,26 @@
-# React + Vite
+# GitHub User Search Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React application that allows users to search for GitHub profiles using the GitHub API. It displays basic user information and links to their GitHub profiles.
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The GitHub User Search Application provides:
 
-## Expanding the ESLint configuration
+- A search input for GitHub usernames
+- Display of user details: avatar, name, username, bio, followers, and following
+- Link to the user's GitHub profile
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Project Structure
+
+- `src/components/` - Holds all React components
+- `src/services/` - Contains API service files
+- `src/App.jsx` - Main App component
+- `src/main.jsx` - Entry point for React
+- `src/index.css` - Global styles
+- `public/` - Static assets like images
+
+## Installed Packages
+
+- `axios` for making HTTP requests to the GitHub API
+- `react` and `react-dom` for building the app
+- `vite` for the development environment and fast refresh
