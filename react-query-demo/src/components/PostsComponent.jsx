@@ -8,18 +8,31 @@ function PostsComponent() {
     return response.json();
   };
 
-  
-  const { data, error, isLoading, refetch } = useQuery("posts", fetchPosts, {
+  const {
+    data,
+    error,
+    isLoading,
+    isError,
+    isFetching,
+    refetch,
+  } = useQuery("posts", fetchPosts, {
     staleTime: 5000, 
   });
 
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error fetching posts</p>;
+  if (isError) return <p>Error: {error.message}</p>;
 
   return (
     <div>
       <h2>Posts List</h2>
+
+      {/* Refetch button */}
       <button onClick={() => refetch()}>Refetch Posts</button>
+
+      {/* Show if fetching new data or serving from cache */}
+      {isFetching && <p>Updating data...</p>}
+
+      {/* Display only first 10 posts */}
       <ul>
         {data.slice(0, 10).map((post) => (
           <li key={post.id}>
