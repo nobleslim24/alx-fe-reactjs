@@ -16,7 +16,10 @@ function PostsComponent() {
     isFetching,
     refetch,
   } = useQuery("posts", fetchPosts, {
-    staleTime: 5000, 
+    staleTime: 5000,           
+    cacheTime: 1000 * 60 * 5,  
+    refetchOnWindowFocus: false, 
+    keepPreviousData: true,    
   });
 
   if (isLoading) return <p>Loading...</p>;
@@ -29,10 +32,9 @@ function PostsComponent() {
       {/* Refetch button */}
       <button onClick={() => refetch()}>Refetch Posts</button>
 
-      {/* Show if fetching new data or serving from cache */}
+      {/* Show fetching status */}
       {isFetching && <p>Updating data...</p>}
 
-      {/* Display only first 10 posts */}
       <ul>
         {data.slice(0, 10).map((post) => (
           <li key={post.id}>
