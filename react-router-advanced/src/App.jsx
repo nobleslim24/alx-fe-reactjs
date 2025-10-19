@@ -1,39 +1,25 @@
-import React, { useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import Profile from "./pages/Profile";
-import BlogPost from "./pages/BlogPost";
-import ProtectedRoute from "./pages/ProtectedRoute";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Profile from "./components/Profile";
+import BlogPost from "./components/BlogPost";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
   return (
-    <div>
-      <nav>
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/profile">Profile (Protected)</Link> |{" "}
-        <Link to="/blog/1">Sample Blog Post (ID=1)</Link> |{" "}
-        <button onClick={() => setIsAuthenticated(!isAuthenticated)}>
-          {isAuthenticated ? "Logout" : "Login"}
-        </button>
-      </nav>
-
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-
         <Route
           path="/profile/*"
           element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <ProtectedRoute>
               <Profile />
             </ProtectedRoute>
           }
         />
-
-        <Route path="/blog/:id" element={<BlogPost />} />
+        <Route path="/post/:id" element={<BlogPost />} />
       </Routes>
-    </div>
+    </BrowserRouter>
   );
 }
 
