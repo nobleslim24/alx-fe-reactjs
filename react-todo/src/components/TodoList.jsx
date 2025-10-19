@@ -1,48 +1,50 @@
 import React, { useState } from "react";
 import AddTodoForm from "./AddTodoForm";
 
-function TodoList() {
+const TodoList = () => {
   const [todos, setTodos] = useState([
-    { text: "Learn React", completed: false },
-    { text: "Build a Todo App", completed: false },
+    { id: 1, text: "Learn React", completed: false },
+    { id: 2, text: "Build a Todo App", completed: false },
   ]);
 
   const addTodo = (text) => {
-    setTodos([...todos, { text, completed: false }]);
+    const newTodo = { id: Date.now(), text, completed: false };
+    setTodos([...todos, newTodo]);
   };
 
-  const toggleTodo = (index) => {
-    const newTodos = [...todos];
-    newTodos[index].completed = !newTodos[index].completed;
-    setTodos(newTodos);
+  const toggleTodo = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
   };
 
-  const deleteTodo = (index) => {
-    setTodos(todos.filter((_, i) => i !== index));
+  const deleteTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
-    <>
+    <div>
+      <h1>Todo List</h1>
       <AddTodoForm addTodo={addTodo} />
       <ul>
-        {todos.map((todo, index) => (
+        {todos.map((todo) => (
           <li
-            key={index}
+            key={todo.id}
+            onClick={() => toggleTodo(todo.id)}
             style={{
-              cursor: "pointer",
               textDecoration: todo.completed ? "line-through" : "none",
+              cursor: "pointer",
             }}
-            onClick={() => toggleTodo(index)}
           >
             {todo.text}
-            <button onClick={(e) => { e.stopPropagation(); deleteTodo(index); }}>
-              Delete
-            </button>
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
-}
+};
 
 export default TodoList;
